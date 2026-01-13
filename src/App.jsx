@@ -11,36 +11,41 @@ function App() {
 
   const [mySearch, setMySearch] = useState("");
   const [myRecipes, setMyRecipes] = useState([]);
+  const [wordSubmitted, setWordSubmitted] = useState("salmon")
 
   useEffect(() => {
     const getRecipe = async () => {
-      const url = `https://api.edamam.com/api/recipes/v2?type=public&q=lemon&app_id=${MY_ID}&app_key=${MY_KEY}`;
+      const url = `https://api.edamam.com/api/recipes/v2?type=public&q=${wordSubmitted}&app_id=${MY_ID}&app_key=${MY_KEY}`;
       const response = await fetch(url, {
           headers: {
               "Edamam-Account-User": "Lilia", // любой ваш userId
           },
       });
       const data = await response.json();
-      console.log(data.hits);
+      
       setMyRecipes(data.hits)
     }
     getRecipe()
-  }, []);
+  }, [wordSubmitted]);
   
   const myRecipeSearch = (e) => {
-    setMySearch(e.target.value)
-    console.log(e.target.value)
+    setMySearch(e.target.value)    
+  }
+
+  const finalSearch = (e) => {
+    e.preventDefault();
+    setWordSubmitted(mySearch);
   }
 
   return (
     <div className='App'>
 
-      <div className='container'>
+      <div className='header'>
         <h1>Find a Recipe</h1>
       </div>
 
-      <form>
-        <input type="text" placeholder='Type the ingredients separated by spaces' value={mySearch} onChange={myRecipeSearch} />
+      <form onSubmit={finalSearch}>
+        <input className='search' type="text" placeholder='Type the ingredients separated by spaces...' value={mySearch} onChange={myRecipeSearch} />
       </form>
 
       <div className='recipes-container'>
@@ -48,8 +53,6 @@ function App() {
           <MyRecipesComponent key={index} recipeTitle={element.recipe.label} calories={element.recipe.calories} ingredients={element.recipe.ingredientLines} image={element.recipe.image} recipeURL={element.recipe.url} />
         )) }
       </div>
-
-
       
     </div>
   )

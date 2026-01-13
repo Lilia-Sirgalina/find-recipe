@@ -1,7 +1,7 @@
 function MyRecipesComponent ({recipeTitle, calories, ingredients, image, recipeURL}) {
     return(
         <div className="recipe-card">
-            <h1>{recipeTitle}</h1>
+            <h2>{recipeTitle}</h2>
 
             <p>{calories.toFixed()} calories</p>
 

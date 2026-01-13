@@ -1,1 +1,26 @@
+.App {
+  background-color: #C9F4AA;;
+}
 
+.header {
+    display: flex;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;    
+}
+
+.search {
+    width: 80%;
+    padding: 10px;
+    font-family: 'Poppins', sans-serif;    
+}
+
+form {
+  display: flex;
+  justify-content: center;
+}
+
+.recipes-container {
+    display: flex;
+    flex-wrap: wrap;    
+}
