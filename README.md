@@ -1,16 +1,41 @@
-# React + Vite
+# Recipe Search by Ingredients
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Demo  
+🔗 View the app on Netlify (https://lily-find-recipe.netlify.app)
 
-Currently, two official plugins are available:
+## Project Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Recipe Search by Ingredients** is a small educational React application that allows users to search for recipes using one or multiple ingredients.
 
-## React Compiler
+The app is built with **React (Vite)** and consists of two main components:
+- One component contains the application logic, title, and search input.
+- The second component displays the list of recipes retrieved from the API.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The application uses the `useEffect` hook to fetch data from an external API.  
+Three `useState` hooks are implemented:
+- One state stores the value entered in the input field.
+- The second state stores the array of recipes received from the API.
+- The third state stores the ingredient(s) used to perform the search.
 
-## Expanding the ESLint configuration
+No installation is required.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Here's what the app looks like:
+
+![App Screenshot](screenshot-recipe.JPG)
+
+## How to Use:
+- Enter one or more ingredients into the search input.
+- Press **Enter** or click the **search icon**.
+- The app will display recipes that include the specified ingredient(s).
+
+## Features:
+- Search for recipes by one or multiple ingredients.
+- Fetching recipe data from an external API using `useEffect`.
+- State management using React `useState`.
+- Component-based architecture.
+- Simple and intuitive user interface.
+
+## Requirements:
+- A modern web browser.
+- JavaScript enabled.
+

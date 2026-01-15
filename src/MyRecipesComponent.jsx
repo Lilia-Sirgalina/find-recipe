@@ -1,3 +1,5 @@
+import icon from './icons8-tick-48.png'
+
 function MyRecipesComponent ({recipeTitle, calories, ingredients, image, recipeURL}) {
     return(
         <div className="recipe-card">
@@ -6,14 +8,20 @@ function MyRecipesComponent ({recipeTitle, calories, ingredients, image, recipeU
             <p>{calories.toFixed()} calories</p>
 
             <ul>
-                {ingredients.map((item, index) => {
-                    return(<li key={index}>{item}</li>)
+                {ingredients.map((item, index) => {                    
+                    return(
+                        <li key={index}> 
+                            <img src={icon} alt="icon" width="20px" />  
+                            {item}
+                        </li>)
                 })}
             </ul>
 
-            <img src={image} alt="dish" />
+            <img className='recipe-image' src={image} alt="dish" />
 
-            <button><a href={recipeURL} target="_blank">View recipe</a></button>
+            <br />
+
+            <button className='recipe-button'><a href={recipeURL} target="_blank">View recipe</a></button>
         </div>
     )
 }

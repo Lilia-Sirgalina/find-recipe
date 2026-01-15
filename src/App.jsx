@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
+import Swal from 'sweetalert2'
 import './App.css'
-import MyRecipesComponent from './MyRecipesComponent';
+import MyRecipesComponent from './MyRecipesComponent'
+import searchIcon from './icons8-search-120.png'
 
 // https://api.edamam.com/api/recipes/v2?type=public&q=lemon&app_id=...&app_key=...
 
@@ -11,7 +13,7 @@ function App() {
 
   const [mySearch, setMySearch] = useState("");
   const [myRecipes, setMyRecipes] = useState([]);
-  const [wordSubmitted, setWordSubmitted] = useState("salmon")
+  const [wordSubmitted, setWordSubmitted] = useState("avocado");  
 
   useEffect(() => {
     const getRecipe = async () => {
@@ -21,11 +23,20 @@ function App() {
               "Edamam-Account-User": "Lilia", // любой ваш userId
           },
       });
-      const data = await response.json();
-      
-      setMyRecipes(data.hits)
-    }
-    getRecipe()
+      const data = await response.json();  
+
+      if (data.hits.length === 0) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Please enter correct data",            
+          });
+      return;      
+      } 
+
+      setMyRecipes(data.hits);           
+    }    
+    getRecipe();    
   }, [wordSubmitted]);
   
   const myRecipeSearch = (e) => {
@@ -34,7 +45,11 @@ function App() {
 
   const finalSearch = (e) => {
     e.preventDefault();
-    setWordSubmitted(mySearch);
+    
+    if (mySearch === "" || !isNaN(Number(mySearch))) {
+        setWordSubmitted("avocado");
+    }    
+    else setWordSubmitted(mySearch);
   }
 
   return (
@@ -46,11 +61,18 @@ function App() {
 
       <form onSubmit={finalSearch}>
         <input className='search' type="text" placeholder='Type the ingredients separated by spaces...' value={mySearch} onChange={myRecipeSearch} />
-      </form>
+        <button onClick={finalSearch}><img src={searchIcon} alt="icon" width="25px" /></button>
+      </form>      
 
       <div className='recipes-container'>
         {myRecipes.map((element, index) => (
-          <MyRecipesComponent key={index} recipeTitle={element.recipe.label} calories={element.recipe.calories} ingredients={element.recipe.ingredientLines} image={element.recipe.image} recipeURL={element.recipe.url} />
+          <MyRecipesComponent 
+          key={index} 
+          recipeTitle={element.recipe.label} 
+          calories={element.recipe.calories} 
+          ingredients={element.recipe.ingredientLines} 
+          image={element.recipe.image} 
+          recipeURL={element.recipe.url} />
         )) }
       </div>
       
