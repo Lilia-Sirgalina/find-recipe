@@ -60,7 +60,7 @@ function App() {
       </div>
 
       <form onSubmit={finalSearch}>
-        <input className='search' type="text" placeholder='Type the ingredients separated by spaces...' value={mySearch} onChange={myRecipeSearch} />
+        <input className='search' type="text" placeholder='Type ingredients separated by commas or spaces...' value={mySearch} onChange={myRecipeSearch} />
         <button onClick={finalSearch}><img src={searchIcon} alt="icon" width="25px" /></button>
       </form>      
 
